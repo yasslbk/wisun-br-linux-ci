@@ -44,13 +44,12 @@ jobs:
         env:
           COVERITY_SCAN_TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
         run: |
-          curl -sSL \
-            --form "token=${COVERITY_SCAN_TOKEN}" \
-            --form "project=wisun-br-linux" \
-            "https://scan.coverity.com/download/cxx/linux64" \
+          wget -qO- "https://scan.coverity.com/download/cxx/linux64" \
+            --post-data "token=${COVERITY_SCAN_TOKEN}&project=wisun-br-linux" \
             | tar -xzC /opt
-          ls -al /opt/coverity*/bin/cov*
-          ln -sfn /opt/coverity*/bin/cov* /usr/local/bin
+          ls -al /opt/*/bin/cov* || true
+          ls -al /opt/cov* || true
+          ls -al /opt/  || true
           coverity --version
       - name: Compile with Coverity
         run: |
