@@ -49,6 +49,7 @@ jobs:
             --form "project=wisun-br-linux" \
             "https://scan.coverity.com/download/cxx/linux64" \
             | tar -xzC /opt
+          ls -al /opt/coverity*/bin/cov*
           ln -sfn /opt/coverity*/bin/cov* /usr/local/bin
           coverity --version
       - name: Compile with Coverity
