@@ -48,8 +48,7 @@ jobs:
             --post-data "token=${COVERITY_SCAN_TOKEN}&project=wisun-br-linux" \
             | tar -xzC /opt
           ls -al /opt/*/bin/cov* || true
-          ls -al /opt/cov* || true
-          ls -al /opt/  || true
+          ls -al /opt/cov*/bin/cov* || true
           coverity --version
       - name: Compile with Coverity
         run: |
